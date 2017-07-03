@@ -1,0 +1,120 @@
+2017-07-03 15:08:28 [stackCC17grp16]: CREATE_IN_PROGRESS  Stack CREATE started
+2017-07-03 15:08:28 [stackCC17grp16.security_group_frontend]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:29 [stackCC17grp16.network]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:30 [stackCC17grp16.router]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:31 [stackCC17grp16.network]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:31 [stackCC17grp16.router]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:31 [stackCC17grp16.security_group_frontend]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:31 [stackCC17grp16.security_group_backend]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:33 [stackCC17grp16.subnet]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:35 [stackCC17grp16.security_group_backend]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:35 [stackCC17grp16.subnet]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:35 [stackCC17grp16.backends]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:38 [stackCC17grp16.security_group_docker_manager]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:39 [stackCC17grp16.router_interface]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:08:42 [stackCC17grp16.router_interface]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:42 [stackCC17grp16.security_group_docker_manager]: CREATE_COMPLETE  state changed
+2017-07-03 15:08:42 [stackCC17grp16.frontend]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:09:02 [stackCC17grp16.backends]: CREATE_COMPLETE  state changed
+2017-07-03 15:09:03 [stackCC17grp16.frontend]: CREATE_COMPLETE  state changed
+2017-07-03 15:09:03 [stackCC17grp16.floating_ip]: CREATE_IN_PROGRESS  state changed
+2017-07-03 15:09:05 [stackCC17grp16.floating_ip]: CREATE_COMPLETE  state changed
+2017-07-03 15:09:05 [stackCC17grp16]: CREATE_COMPLETE  Stack CREATE completed successfully
++---------------------+-----------------------------------------------------------------+
+| Field               | Value                                                           |
++---------------------+-----------------------------------------------------------------+
+| id                  | c2dd937e-d231-4714-9a15-19141421dc92                            |
+| stack_name          | stackCC17grp16                                                  |
+| description         | Landscape of one frontend VM and two backend VMs running Docker |
+| creation_time       | 2017-07-03T15:08:27                                             |
+| updated_time        | None                                                            |
+| stack_status        | CREATE_COMPLETE                                                 |
+| stack_status_reason | Stack CREATE completed successfully                             |
++---------------------+-----------------------------------------------------------------+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Field                 | Value                                                                                                                                     
+|
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| id                    | c2dd937e-d231-4714-9a15-19141421dc92                                                                                                      
+|
+| stack_name            | stackCC17grp16                                                                                                                            
+|
+| description           | Landscape of one frontend VM and two backend VMs running Docker                                                                           
+|
+| creation_time         | 2017-07-03T15:08:27                                                                                                                       
+|
+| updated_time          | None                                                                                                                                      
+|
+| stack_status          | CREATE_COMPLETE                                                                                                                           
+|
+| stack_status_reason   | Stack CREATE completed successfully                                                                                                       
+|
+| parameters            | OS::project_id: 06b5ed6b475043d3b619d0b2d1a3f95f                                                                                          
+|
+|                       | OS::stack_id: c2dd937e-d231-4714-9a15-19141421dc92                                                                                        
+|
+|                       | OS::stack_name: stackCC17grp16                                                                                                            
+|
+|                       | external_net: tu-internal                                                                                                                 
+|
+|                       | flavor: Cloud Computing                                                                                                                   
+|
+|                       | image: ubuntu-16.04                                                                                                                       
+|
+|                       | key_pair: kybranz                                                                                                                         
+|
+|                       | zone: Cloud Computing 2017                                                                                                                
+|
+|                       |                                                                                                                                           
+|
+| outputs               | - description: Virtual IPs of the backend servers                                                                                         
+|
+|                       |   output_key: backend_ips                                                                                                                 
+|
+|                       |   output_value:                                                                                                                           
+|
+|                       |   - 192.168.0.4                                                                                                                           
+|
+|                       |   - 192.168.0.3                                                                                                                           
+|
+|                       | - description: Floating IP of the frontend server                                                                                         
+|
+|                       |   output_key: floating_ip                                                                                                                 
+|
+|                       |   output_value: 10.200.2.57                                                                                                               
+|
+|                       | - description: Private virtual IP of the frontend server                                                                                  
+|
+|                       |   output_key: private_ip                                                                                                                  
+|
+|                       |   output_value: 192.168.0.5                                                                                                               
+|
+|                       |                                                                                                                                           
+|
+| links                 | - href: 
+http://cloud.cit.tu-berlin.de:8004/v1/06b5ed6b475043d3b619d0b2d1a3f95f/stacks/stackCC17grp16/c2dd937e-d231-4714-9a15-19141421dc92 |
+|                       |   rel: self                                                                                                                               
+|
+|                       |                                                                                                                                           
+|
+| disable_rollback      | True                                                                                                                                      
+|
+| parent                | None                                                                                                                                      
+|
+| tags                  | None                                                                                                                                      
+|
+| stack_user_project_id | adddd1b22df444f18cf65a511674ff8a                                                                                                          
+|
+| capabilities          | []                                                                                                                                        
+|
+| notification_topics   | []                                                                                                                                        
+|
+| timeout_mins          | None                                                                                                                                      
+|
+| stack_owner           | None                                                                                                                                      
+|
++-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+
