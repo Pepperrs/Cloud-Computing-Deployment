@@ -11,7 +11,7 @@ STACK="$1"
 
 ./cc-openstack stack create $STACK -t server-landscape.yaml \
   --parameter external_net=tu-internal \
-  --parameter key_pair=kybranz \
+  --parameter key_pair=keywithoutpassphrase \
   --parameter flavor="Cloud Computing" \
   --parameter image=ubuntu-16.04 \
   --parameter zone="Cloud Computing 2017" \
