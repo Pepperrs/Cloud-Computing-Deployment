@@ -7,9 +7,9 @@ STACK="$1"
 # Obtain information from OpenStack. It is important that the last two variables are named LC_* (see last comment in this script).
 # The three variables correspond to output variables of the server-landscape.yaml template.
 echo "Obtainining information about stack ${STACK}..."
-export MASTER_FLOATING=$(cc-openstack stack show stack_grp16 --format json | jq '.outputs[1].output_value')
-export LC_MASTER_PRIVATE=$(cc-openstack stack show stack_grp16 --format json | jq '.outputs[2].output_value')
-export LC_BACKEND_IPS=$(cc-openstack stack show stack_grp16 --format json | jq '.outputs[0].output_value | @tsv')
+export MASTER_FLOATING=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[1].output_value')
+export LC_MASTER_PRIVATE=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[2].output_value')
+export LC_BACKEND_IPS=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[0].output_value | @tsv')
 
 # Copy both docker-compose files to the frontend server
 scp Frontend/docker-compose.yml ubuntu@$MASTER_FLOATING:~/docker-compose-frontend.yml
@@ -34,7 +34,7 @@ SSHOPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=3 -o BatchMode=yes"
 ssh-keyscan $LC_BACKEND_IPS > ~/.ssh/known_hosts
 
 # Obtain a token that can be used to join the swarm as a worker
-TOKEN=$(sudo docker swarm join-token manager | tail -n 2 | head -n 1 | awk -F ' ' '{print $5}')
+TOKEN=$(sudo docker swarm join-token worker | tail -n 2 | head -n 1 | awk -F ' ' '{print $5}')
 
 # Prepare the script to execute on the backends to join the docker swarm.
 # First make sure that docker is running properly...
