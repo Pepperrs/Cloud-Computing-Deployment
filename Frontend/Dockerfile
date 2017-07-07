@@ -11,7 +11,7 @@ COPY fix-nginx-conf.sh /etc/nginx/fix-nginx-conf.sh
 VOLUME /hypervisor_etc
 
 # Run fix-nginx-config.sh and nginx
-RUN bash /etc/nginx/fix-nginx-conf.sh $backend_ips
+RUN bash /etc/nginx/fix-nginx-conf.sh "$backend_ips"
 
 # Expose ports.
 EXPOSE 80

@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     environment:
-      - CC_BACKEND_SERVERS=${CC_BACKEND_SERVERS}
+      - CC_BACKEND_SERVERS=$LC_BACKEND_IPS
     deploy:
       replicas: 2
       restart_policy:
