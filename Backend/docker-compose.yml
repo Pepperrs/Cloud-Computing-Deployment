@@ -1,8 +1,15 @@
 version: "3"
 services:
-  backend:
+  stack-grp16-backend:
     build:
       context: .
     image: knusprig/nginx_backend
     ports:
       - "8000:80"
+    deploy:
+      replicas: 5
+      restart_policy:
+          condition: on-failure
+      placement:
+        constraints:
+          - node.hostname != stack-grp16-frontend

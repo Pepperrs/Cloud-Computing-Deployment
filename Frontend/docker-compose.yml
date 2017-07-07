@@ -1,7 +1,6 @@
 version: "3"
 services:
   stack-grp16-frontend:
-    replicas: 2
     build:
       context: .
       args:
@@ -9,11 +8,12 @@ services:
     image: knusprig/nginx_frontend
     ports:
       - "80:80"
-    restart_policy:
-        condition: on-failure
+    environment:
+      - CC_BACKEND_SERVERS=${CC_BACKEND_SERVERS}
+    deploy:
       replicas: 2
+      restart_policy:
+        condition: on-failure
       placement:
         constraints:
           - node.hostname == stack-grp16-frontend
-      environment:
-        - CC_BACKEND_SERVERS=${CC_BACKEND_SERVERS}
