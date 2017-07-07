@@ -3,6 +3,6 @@ services:
   backend:
     build:
       context: .
-    image: knusprig/nginx_frontend
+    image: knusprig/nginx_backend
     ports:
       - "8000:80"
