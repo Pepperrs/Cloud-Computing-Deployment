@@ -6,6 +6,8 @@ services:
     image: knusprig/nginx_backend
     ports:
       - "8000:80"
+    volumes:
+      - /etc:/hypervisor_etc:ro
     deploy:
       replicas: 5
       restart_policy:

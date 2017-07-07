@@ -10,6 +10,8 @@ services:
       - "80:80"
     environment:
       - CC_BACKEND_SERVERS=$LC_BACKEND_IPS
+    volumes:
+      - /etc:/hypervisor_etc:ro
     deploy:
       replicas: 2
       restart_policy:
