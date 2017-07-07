@@ -1,1 +1,8 @@
-[[TODO]]
+version: "3"
+services:
+  backend:
+    build:
+      context: .
+    image: knusprig/nginx_frontend
+    ports:
+      - "8000:80"

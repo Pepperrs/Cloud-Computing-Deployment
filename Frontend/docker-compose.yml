@@ -1,1 +1,10 @@
-[[TODO]]
+version: "3"
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        backend_ips: $LC_BACKEND_IPS
+    image: knusprig/nginx_frontend
+    ports:
+      - "80:80"
