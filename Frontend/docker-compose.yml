@@ -1,1 +1,15 @@
-[[TODO]]
+version: '3'
+services:
+  stack-grp16-frontend:
+    ports:
+      - 80:80
+    image: knusprig:nginx_frontend:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 2
+      placement:
+        constraints:
+          - node.hostname == stack-grp16-frontend
+      environment:
+        - CC_BACKEND_SERVERS=${CC_BACKEND_SERVERS}
