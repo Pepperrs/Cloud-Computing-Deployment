@@ -43,7 +43,7 @@ backend_setup_1="{ sudo docker ps &> /dev/null || sudo service docker restart; }
 backend_setup_2="sudo docker [[TODO]]"
 
 # Connect to the backend servers and make them join the swarm
-for i in $LC_BACKEND_IPS; do ssh $SSHOPTS ubuntu@$i "$backend_setup_1 && $backup_setup_2"; done
+for i in $LC_BACKEND_IPS; do ssh $SSHOPTS ubuntu@$i "$backend_setup_1 && $backend_setup_2"; done
 
 # Launch the backend stack
 # sudo -E docker [[TODO]]
