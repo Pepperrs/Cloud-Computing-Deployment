@@ -12,5 +12,5 @@ VOLUME /hypervisor_etc
 EXPOSE 80
 
 # Run fix-nginx-config.sh and nginx
-ENTRYPOINT /bin/bash -c
-CMD /etc/nginx/fix-nginx-conf.sh "$CC_BACKEND_SERVERS" && nginx
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["/etc/nginx/fix-nginx-conf.sh \"$CC_BACKEND_SERVERS\" && nginx"]
