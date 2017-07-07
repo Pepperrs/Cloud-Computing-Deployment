@@ -1,11 +1,15 @@
-version: '3'
+version: "3"
 services:
   stack-grp16-frontend:
+    replicas: 2
+    build:
+      context: .
+      args:
+        backend_ips: $LC_BACKEND_IPS
+    image: knusprig/nginx_frontend
     ports:
-      - 80:80
-    image: knusprig:nginx_frontend:latest
-    deploy:
-      restart_policy:
+      - "80:80"
+    restart_policy:
         condition: on-failure
       replicas: 2
       placement:

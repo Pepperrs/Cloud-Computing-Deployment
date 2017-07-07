@@ -7,12 +7,13 @@ STACK="$1"
 # Obtain information from OpenStack. It is important that the last two variables are named LC_* (see last comment in this script).
 # The three variables correspond to output variables of the server-landscape.yaml template.
 echo "Obtainining information about stack ${STACK}..."
-export MASTER_FLOATING=$([[TODO]])
-export LC_MASTER_PRIVATE=$([[TODO]])
-export LC_BACKEND_IPS=$([[TODO]])
+export MASTER_FLOATING=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[1].output_value')
+export LC_MASTER_PRIVATE=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[2].output_value')
+export LC_BACKEND_IPS=$(cc-openstack stack show $STACK --format json | jq -r '.outputs[0].output_value | @tsv')
 
 # Copy both docker-compose files to the frontend server
-[[TODO]]
+scp Frontend/docker-compose.yml ubuntu@$MASTER_FLOATING:~/docker-compose-frontend.yml
+scp Backend/docker-compose.yml ubuntu@$MASTER_FLOATING:~/docker-compose-backend.yml
 
 # Define a multi-line variable containing the script to be executed on the frontend machine.
 # The tasks of this script:
@@ -26,31 +27,31 @@ read -d '' INIT_SCRIPT <<'xxxxxxxxxxxxxxxxx'
 sudo docker ps &> /dev/null || sudo service docker restart
 
 # Initialize the Docker swarm
-sudo [[TODO]]
+sudo docker swarm init --advertise-addr $LC_MASTER_PRIVATE
 
 # Make sure the SSH connection to the backend servers works without user interaction
 SSHOPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=3 -o BatchMode=yes"
 ssh-keyscan $LC_BACKEND_IPS > ~/.ssh/known_hosts
 
 # Obtain a token that can be used to join the swarm as a worker
-TOKEN=$(sudo docker [[TODO]])
+TOKEN=$(sudo docker swarm join-token worker | tail -n 2 | head -n 1 | awk -F ' ' '{print $5}')
 
 # Prepare the script to execute on the backends to join the docker swarm.
 # First make sure that docker is running properly...
 backend_setup_1="{ sudo docker ps &> /dev/null || sudo service docker restart; }"
 
 # ... then join the docker swarm on the frontend server
-backend_setup_2="sudo docker [[TODO]]"
+backend_setup_2="sudo docker swarm join --token $TOKEN $LC_MASTER_PRIVATE:2377"
 
 # Connect to the backend servers and make them join the swarm
-for i in $LC_BACKEND_IPS; do ssh $SSHOPTS ubuntu@$i "$backend_setup_1 && $backup_setup_2"; done
+for i in $LC_BACKEND_IPS; do ssh $SSHOPTS ubuntu@$i "$backend_setup_1 && $backend_setup_2"; done
 
 # Launch the backend stack
-# sudo -E docker [[TODO]]
+# sudo -E docker stack deploy --compose-file=docker-compose-backend.yml cc-backend
 
 # Launch the frontend stack
 export CC_BACKEND_SERVERS="$LC_BACKEND_IPS"
-# sudo -E docker [[TODO]]
+# sudo -E docker stack deploy --compose-file=docker-compose-frontend.yml cc-frontend
 
 xxxxxxxxxxxxxxxxx
 
